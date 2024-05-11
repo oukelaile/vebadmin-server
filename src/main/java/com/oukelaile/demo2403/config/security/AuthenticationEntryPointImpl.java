@@ -1,8 +1,8 @@
 package com.oukelaile.demo2403.config.security;
 
 import com.alibaba.fastjson2.JSON;
-import com.oukelaile.demo2403.util.WebUtils;
-import com.oukelaile.demo2403.util.vo.ResponseEnum;
+import com.oukelaile.demo2403.utils.WebUtils;
+import com.oukelaile.demo2403.utils.vo.ResponseEnum;
 import com.oukelaile.demo2403.vo.system.ResponseVo;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;

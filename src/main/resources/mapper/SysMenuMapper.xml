@@ -6,7 +6,7 @@
         <result column="MENU_ID" jdbcType="BIGINT" property="menuId" />
         <result column="MENU_NAME" jdbcType="VARCHAR" property="menuName" />
         <result column="PARENT_MENU_ID" jdbcType="BIGINT" property="parentMenuId" />
-        <result column="MENU_PATH" jdbcType="VARCHAR" property="menuPath" />
+        <result column="MENU_PATH" jdbcType="VARCHAR" property="routerPath" />
         <result column="MENU_ORDER" jdbcType="INTEGER" property="menuOrder" />
         <result column="MENU_ICON" jdbcType="VARCHAR" property="menuIcon" />
     </resultMap>
@@ -18,8 +18,11 @@
         WHERE del_flag = 0 AND status = 0
     </select>
     <select id="selectAllList" resultType="com.oukelaile.demo2403.entity.system.SysMenu">
-                SELECT * FROM sys_menu
-                WHERE del_flag = 0 and parent_menu_id =0
+        SELECT * FROM sys_menu
+        WHERE del_flag = 0
+        <if test="param.menuName != null and param.menuName != ''">
+            AND menu_name LIKE CONCAT('%',#{param.menuName},'%')
+        </if>
     </select>
 
     <!--    <select id="selectAllList" resultType="com.oukelaile.demo2403.entity.system.SysMenu">-->

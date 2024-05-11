@@ -4,11 +4,10 @@ package com.oukelaile.demo2403.controller.system;
 import com.oukelaile.demo2403.ao.system.SysMenuAo;
 import com.oukelaile.demo2403.entity.system.SysMenu;
 import com.oukelaile.demo2403.query.system.SysMenuQuery;
-import com.oukelaile.demo2403.service.system.SysMenuSesrvice;
-import com.oukelaile.demo2403.util.vo.CommonPage;
-import com.oukelaile.demo2403.util.vo.ResponseEnum;
+import com.oukelaile.demo2403.service.system.SysMenuService;
+import com.oukelaile.demo2403.utils.vo.ResponseEnum;
 import com.oukelaile.demo2403.vo.system.ResponseVo;
-import com.oukelaile.demo2403.vo.system.page.SysMenuPageVo;
+import com.oukelaile.demo2403.vo.system.SysMenuTableVo;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +21,7 @@ import java.util.List;
 public class SysMenuController {
 
     @Resource
-    SysMenuSesrvice sysMenuSesrvice;
+    SysMenuService sysMenuService;
 
 
     /**
@@ -31,7 +30,7 @@ public class SysMenuController {
     @PostMapping("/getMenu")
     public Object getMenu() {
 
-        List<SysMenu> menus = sysMenuSesrvice.getMenu();
+        java.util.List<SysMenu> menus = sysMenuService.getMenu();
 
         return ResponseVo.response(ResponseEnum.SUCCESSFUL, menus);
     }
@@ -41,7 +40,7 @@ public class SysMenuController {
      */
     @PostMapping("/getMenuList")
     public Object getMenuList(@RequestBody SysMenuQuery query) {
-        CommonPage<SysMenuPageVo> menuList = sysMenuSesrvice.findByPage(query);
+        List<SysMenuTableVo> menuList = sysMenuService.findByPage(query);
         return ResponseVo.response(ResponseEnum.SUCCESSFUL, menuList);
     }
 
@@ -53,7 +52,7 @@ public class SysMenuController {
      */
     @PostMapping("/addMenu")
     public Object addMenu(@RequestBody SysMenuAo ao) {
-        if (sysMenuSesrvice.addMenu(ao)) {
+        if (sysMenuService.addMenu(ao)) {
             return ResponseVo.success();
         }
         return ResponseVo.error();
@@ -66,8 +65,8 @@ public class SysMenuController {
      * @return
      */
     @PostMapping("/logicalDelete")
-    public Object logicalDelete(@RequestBody List<Long> ids) {
-        if (sysMenuSesrvice.logicalDelete(ids)) {
+    public Object logicalDelete(@RequestBody java.util.List<Long> ids) {
+        if (sysMenuService.logicalDelete(ids)) {
             return ResponseVo.success();
         }
         return ResponseVo.error();
@@ -75,7 +74,7 @@ public class SysMenuController {
 
     @PostMapping("/updateById")
     public Object updateById(@RequestBody SysMenuAo ao) {
-        if (sysMenuSesrvice.updateById(ao)) {
+        if (sysMenuService.updateById(ao)) {
             return ResponseVo.success();
         } else {
             return ResponseVo.error();
@@ -84,6 +83,7 @@ public class SysMenuController {
 
     @PostMapping("/selectById")
     public Object selectById(@RequestBody SysMenuAo ao) {
-        return ResponseVo.response(ResponseEnum.SUCCESSFUL, sysMenuSesrvice.selectById(ao.getMenuId()));
+        return ResponseVo.response(ResponseEnum.SUCCESSFUL, sysMenuService.selectById(ao.getMenuId()));
     }
+
 }

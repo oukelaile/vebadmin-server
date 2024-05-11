@@ -1,10 +1,15 @@
 package com.oukelaile.demo2403.query.system;
 
-import com.oukelaile.demo2403.query.base.PageQuery;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class SysMenuQuery extends PageQuery {
+public class SysMenuQuery{
+    
+    /**
+     * 菜单名
+     */
+    private String menuName;
+
 }

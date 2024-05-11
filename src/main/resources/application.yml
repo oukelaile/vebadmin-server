@@ -14,16 +14,33 @@ spring:
         max-wait: -1
         max-idle: 20
         min-idle: 0
-  security:
-    user:
-      name: admin
-      password: admin
+#  security:
+#    user:
+#      name: admin
+#      password: admin
+  servlet:
+    .multipart:
+      .max-file-size: 10MB
+      .max-request-size: 10MB
+
+
+  web:
+    resources:
+      static-locations: file:/E:/fileStorage/
+
 # mybatisPlus配置
 mybatis-plus:
   configuration:
     #开启驼峰命名
     map-underscore-to-camel-case: true
+
 # lombok配置
 lombok:
   equalsAndHashCode:
     callSuper: true
+
+file:
+  storage: "E:/fileStorage"
+  files: "/files"
+
+

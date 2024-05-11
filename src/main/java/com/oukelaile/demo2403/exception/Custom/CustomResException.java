@@ -1,6 +1,6 @@
 package com.oukelaile.demo2403.exception.Custom;
 
-import com.oukelaile.demo2403.util.vo.ResponseEnum;
+import com.oukelaile.demo2403.utils.vo.ResponseEnum;
 import lombok.Getter;
 
 import java.io.Serializable;

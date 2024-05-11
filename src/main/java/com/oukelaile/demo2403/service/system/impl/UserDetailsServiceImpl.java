@@ -5,7 +5,7 @@ import com.oukelaile.demo2403.entity.system.LoginUser;
 import com.oukelaile.demo2403.entity.system.User;
 import com.oukelaile.demo2403.exception.Custom.CustomResException;
 import com.oukelaile.demo2403.mapper.system.UserMapper;
-import com.oukelaile.demo2403.util.vo.ResponseEnum;
+import com.oukelaile.demo2403.utils.vo.ResponseEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

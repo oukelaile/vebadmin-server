@@ -1,7 +1,6 @@
-package com.oukelaile.demo2403.util.vo;
+package com.oukelaile.demo2403.utils.vo;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 
 

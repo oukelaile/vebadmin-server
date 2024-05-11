@@ -1,8 +1,6 @@
 package com.oukelaile.demo2403.vo.shop.page;
 
 import com.oukelaile.demo2403.entity.Shop;
-import com.oukelaile.demo2403.entity.system.SysMenu;
-import com.oukelaile.demo2403.vo.system.page.SysMenuPageVo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

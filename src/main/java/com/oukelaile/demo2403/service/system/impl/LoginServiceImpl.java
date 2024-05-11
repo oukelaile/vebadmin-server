@@ -4,8 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.oukelaile.demo2403.entity.system.LoginUser;
 import com.oukelaile.demo2403.entity.system.User;
 import com.oukelaile.demo2403.service.system.LoginService;
-import com.oukelaile.demo2403.util.JwtUtil;
-import com.oukelaile.demo2403.util.RedisUtils;
+import com.oukelaile.demo2403.utils.JwtUtils;
+import com.oukelaile.demo2403.utils.RedisUtils;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -38,7 +38,7 @@ public class LoginServiceImpl implements LoginService {
         //4自己生成jwt给前端
         LoginUser loginUser= (LoginUser)(authenticate.getPrincipal());
         String userId = loginUser.getUser().getId().toString();
-        String jwt = JwtUtil.createJWT(userId);
+        String jwt = JwtUtils.createJWT(userId);
         Map<String,String> map=new HashMap();
         map.put("token",jwt);
         //5系统用户相关所有信息放入redis

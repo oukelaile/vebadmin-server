@@ -2,7 +2,7 @@ package com.oukelaile.demo2403.controller.system;
 
 import com.oukelaile.demo2403.entity.system.User;
 import com.oukelaile.demo2403.service.system.LoginService;
-import com.oukelaile.demo2403.util.vo.ResponseEnum;
+import com.oukelaile.demo2403.utils.vo.ResponseEnum;
 import com.oukelaile.demo2403.vo.system.ResponseVo;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

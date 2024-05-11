@@ -1,4 +1,4 @@
-package com.oukelaile.demo2403.util.vo;
+package com.oukelaile.demo2403.utils.vo;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 
@@ -6,11 +6,11 @@ public class CommonPageUtils {
     public CommonPageUtils() {
     }
 
-    public static <T> CommonPage<T> assemblyPage(IPage<T> info) {
+    public static <T> List<T> assemblyPage(IPage<T> info) {
         if (null == info) {
             return null;
         } else {
-            CommonPage<T> result = new CommonPage();
+            List<T> result = new List();
             result.setTotalPage(info.getPages());
             result.setTotal(info.getTotal());
             result.setCurrent(info.getCurrent());

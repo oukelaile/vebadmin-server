@@ -1,4 +1,4 @@
-package com.oukelaile.demo2403.util;
+package com.oukelaile.demo2403.utils;
 
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;

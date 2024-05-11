@@ -2,8 +2,8 @@ package com.oukelaile.demo2403.filter;
 
 import com.alibaba.fastjson.JSON;
 import com.oukelaile.demo2403.entity.system.LoginUser;
-import com.oukelaile.demo2403.util.JwtUtil;
-import com.oukelaile.demo2403.util.RedisUtils;
+import com.oukelaile.demo2403.utils.JwtUtils;
+import com.oukelaile.demo2403.utils.RedisUtils;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -38,7 +38,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         //2解析token
         String userId;
         try {
-            Claims claims = JwtUtil.parseJWT(token);
+            Claims claims = JwtUtils.parseJWT(token);
             userId = claims.getSubject();
         } catch (Exception e) {
             throw new RuntimeException("token不合法！");

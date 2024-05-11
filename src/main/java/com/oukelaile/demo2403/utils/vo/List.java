@@ -1,15 +1,13 @@
-package com.oukelaile.demo2403.util.vo;
+package com.oukelaile.demo2403.utils.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CommonPage<T> {
+public class List<T> {
 
     /**
      * 当前页码
@@ -33,6 +31,6 @@ public class CommonPage<T> {
     /**
      * 分页数据列表
      */
-    private List<T> list;
+    private java.util.List<T> list;
 
 }

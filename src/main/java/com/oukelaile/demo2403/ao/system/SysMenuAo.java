@@ -28,18 +28,33 @@ public class SysMenuAo {
     private Long parentMenuId;
 
     /**
-     * 路由地址
+     * 路由路径
      */
-    private String menuPath;
+    private String routerPath;
 
     /**
-     * 显示顺序
+     * 路由名称
      */
-    private Integer menuOrder;
+    private String routerName;
+
+    /**
+     * 路由组件
+     */
+    private String routerComponent;
+
+    /**
+     * 菜单类型
+     */
+    private char menuType;
 
     /**
      * 菜单图标
      */
     private String menuIcon;
+
+    /**
+     * 显示顺序
+     */
+    private Integer menuOrder;
 
 }

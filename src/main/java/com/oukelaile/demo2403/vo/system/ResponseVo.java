@@ -1,6 +1,6 @@
 package com.oukelaile.demo2403.vo.system;
 
-import com.oukelaile.demo2403.util.vo.ResponseEnum;
+import com.oukelaile.demo2403.utils.vo.ResponseEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

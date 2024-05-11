@@ -1,4 +1,4 @@
-package com.oukelaile.demo2403.util;
+package com.oukelaile.demo2403.utils;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;

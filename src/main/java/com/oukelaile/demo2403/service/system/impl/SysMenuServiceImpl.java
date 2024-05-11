@@ -1,19 +1,18 @@
 package com.oukelaile.demo2403.service.system.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.TypeReference;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.oukelaile.demo2403.ao.system.SysMenuAo;
 import com.oukelaile.demo2403.entity.system.SysMenu;
 import com.oukelaile.demo2403.enums.DelFlag;
 import com.oukelaile.demo2403.mapper.system.SysMenuMapper;
 import com.oukelaile.demo2403.query.system.SysMenuQuery;
-import com.oukelaile.demo2403.service.system.SysMenuSesrvice;
-import com.oukelaile.demo2403.util.StringUtil;
-import com.oukelaile.demo2403.util.vo.CommonPage;
-import com.oukelaile.demo2403.util.vo.CommonPageUtils;
-import com.oukelaile.demo2403.vo.system.page.SysMenuPageVo;
+import com.oukelaile.demo2403.service.system.SysMenuService;
+import com.oukelaile.demo2403.utils.StringUtils;
+import com.oukelaile.demo2403.utils.TreeBuilderUtils;
+import com.oukelaile.demo2403.vo.system.SysMenuTableVo;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -25,32 +24,31 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
-public class SysMenuSesrviceImpl implements SysMenuSesrvice {
+public class SysMenuServiceImpl implements SysMenuService {
 
     @Resource
     SysMenuMapper sysMenuMapper;
 
     @Override
-    public List<SysMenu> getMenu() {
-        List<SysMenu> menus = sysMenuMapper.selectMenuNormalAll();
+    public java.util.List<SysMenu> getMenu() {
+        java.util.List<SysMenu> menus = sysMenuMapper.selectMenuNormalAll();
         // 创建菜单ID到菜单对象的映射
         Map<Long, SysMenu> menuMap = getIdSysMenuMap(menus);
         // 将菜单数据转换为树形结构
-        List<SysMenu> treeMenus = getMenuTree(menuMap, 0L, true);
+        java.util.List<SysMenu> treeMenus = getMenuTree(menuMap, 0L, true);
         // 对整个树形结构进行排序
         return sortMenu(treeMenus);
     }
 
     @NotNull
-    private static Map<Long, SysMenu> getIdSysMenuMap(List<SysMenu> menus) {
+    private static Map<Long, SysMenu> getIdSysMenuMap(java.util.List<SysMenu> menus) {
         Map<Long, SysMenu> menuMap = menus.stream().collect(Collectors.toMap(SysMenu::getMenuId, Function.identity()));
         return menuMap;
     }
 
-    private List<SysMenu> sortMenu(List<SysMenu> menus) {
+    private java.util.List<SysMenu> sortMenu(java.util.List<SysMenu> menus) {
         return menus.stream()
                 .sorted(Comparator.comparing(SysMenu::getMenuOrder, Comparator.nullsLast(Integer::compareTo)))
                 .collect(Collectors.toList());
@@ -124,35 +122,40 @@ public class SysMenuSesrviceImpl implements SysMenuSesrvice {
     //}
 
     @Override
-    public CommonPage<SysMenuPageVo> findByPage(SysMenuQuery query) {
-        IPage<SysMenu> pages = new Page<>(query.getCurrentPage(), query.getPageSize());
-        SysMenuQuery sysMenuQuery = StringUtil.convertEmptyToNull(query);
-        //查询getParentMenuId 为0 的顶级菜单 用mybatis做分页计算
-        pages  = sysMenuMapper.selectAllList(pages,sysMenuQuery);
-
-        //上面pages 只查出的顶级菜单 需要也查出子集菜单返回
-        //查询所有不是顶级菜单的数据
-        LambdaQueryWrapper<SysMenu> sysMenuLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        sysMenuLambdaQueryWrapper.ne(SysMenu::getParentMenuId, 0)
-                .ne(SysMenu::getDelFlag, 1);
-        //TODO 这里还需要查询 状态为显示的菜单
-        List<SysMenu> menus = sysMenuMapper.selectList(sysMenuLambdaQueryWrapper);
-
-        List<SysMenu> topMenus = pages.getRecords();
-
-        List<SysMenu> menusList = Stream.concat(menus.stream(), topMenus.stream()).collect(Collectors.toList());
-        //查找出顶级菜单的子菜单 并设置
-        List<SysMenu> treeMenus = new ArrayList<>();
-        Map<Long, SysMenu> idSysMenuMap = getIdSysMenuMap(menusList);
-        //List<SysMenu> treeMenus = getMenuTreeByParentId(idSysMenuMap, 0L);
-        for (int i = 0; i < topMenus.size(); i++) {
-            List<SysMenu> menuTreeByParentId = getMenuTree(idSysMenuMap, topMenus.get(i).getMenuId(), false);
-            treeMenus.addAll(menuTreeByParentId);
-        }
-        pages.setRecords(treeMenus);
-
-        //pageVo.setList();
-        return CommonPageUtils.assemblyPage(pages.convert(SysMenuPageVo::buildVo));
+    public List<SysMenuTableVo> findByPage(SysMenuQuery query) {
+        //IPage<SysMenu> pages = new Page<>(query.getCurrentPage(), query.getPageSize());
+        //SysMenuQuery sysMenuQuery = StringUtils.convertEmptyToNull(query);
+        ////查询getParentMenuId 为0 的顶级菜单 用mybatis做分页计算
+        //pages  = sysMenuMapper.selectAllList(pages,sysMenuQuery);
+        //
+        ////上面pages 只查出的顶级菜单 需要也查出子集菜单返回
+        ////查询所有不是顶级菜单的数据
+        //LambdaQueryWrapper<SysMenu> sysMenuLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        //sysMenuLambdaQueryWrapper.ne(SysMenu::getParentMenuId, 0)
+        //        .ne(SysMenu::getDelFlag, 1);
+        ////TODO 这里还需要查询 状态为显示的菜单
+        //List<SysMenu> menus = sysMenuMapper.selectList(sysMenuLambdaQueryWrapper);
+        //
+        //List<SysMenu> topMenus = pages.getRecords();
+        //
+        //List<SysMenu> menusList = Stream.concat(menus.stream(), topMenus.stream()).collect(Collectors.toList());
+        ////查找出顶级菜单的子菜单 并设置
+        //List<SysMenu> treeMenus = new ArrayList<>();
+        //Map<Long, SysMenu> idSysMenuMap = getIdSysMenuMap(menusList);
+        ////List<SysMenu> treeMenus = getMenuTreeByParentId(idSysMenuMap, 0L);
+        //for (int i = 0; i < topMenus.size(); i++) {
+        //    List<SysMenu> menuTreeByParentId = getMenuTree(idSysMenuMap, topMenus.get(i).getMenuId(), false);
+        //    treeMenus.addAll(menuTreeByParentId);
+        //}
+        //pages.setRecords(treeMenus);
+        //
+        ////pageVo.setList();
+        //return CommonPageUtils.assemblyPage(pages.convert(SysMenuTableVo::buildVo));
+        SysMenuQuery sysMenuQuery = StringUtils.convertEmptyToNull(query);
+        List<SysMenu> sysMenus = sysMenuMapper.selectAllList(sysMenuQuery);
+        JSONArray jsonArray = TreeBuilderUtils.buildTree((JSONArray) JSONArray.toJSON(sysMenus),"menuId","parentMenuId");
+        List<SysMenu> sysMenusTreeList = JSON.parseObject(jsonArray.toJSONString(), new TypeReference<java.util.List<SysMenu>>() {});
+        return SysMenuTableVo.buildTreeVo(sysMenusTreeList);
     }
 
     /**
@@ -162,12 +165,12 @@ public class SysMenuSesrviceImpl implements SysMenuSesrvice {
      * @param byParentId 是否用targetId根据父id查询 true为是  false 为否
      * @return
      */
-    private List<SysMenu> getMenuTree(Map<Long, SysMenu> menuMap, long targetId, boolean byParentId) {
-        List<SysMenu> returnList = new ArrayList<>();
+    private java.util.List<SysMenu> getMenuTree(Map<Long, SysMenu> menuMap, long targetId, boolean byParentId) {
+        java.util.List<SysMenu> returnList = new ArrayList<>();
         for (SysMenu menu : menuMap.values()) {
             if ((byParentId && menu.getParentMenuId() == targetId) || (!byParentId && menu.getParentMenuId() == 0L && menu.getMenuId() == targetId)) {
                 //递归必须 byParentId 为 true
-                List<SysMenu> zMenu = getMenuTree(menuMap, menu.getMenuId(), true);
+                java.util.List<SysMenu> zMenu = getMenuTree(menuMap, menu.getMenuId(), true);
                 // 添加子菜单到当前菜单
                 menu.setChildren(sortMenu(zMenu));
                 returnList.add(menu);
@@ -185,7 +188,7 @@ public class SysMenuSesrviceImpl implements SysMenuSesrvice {
 
 
     @Override
-    public boolean logicalDelete(List<Long> ids) {
+    public boolean logicalDelete(java.util.List<Long> ids) {
         LambdaUpdateWrapper<SysMenu> wrapper = new LambdaUpdateWrapper<>();
         wrapper.in(SysMenu::getMenuId, ids)
                 .set(SysMenu::getDelFlag, DelFlag.DELETED);

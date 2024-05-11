@@ -1,9 +1,9 @@
-package com.oukelaile.demo2403.util;
+package com.oukelaile.demo2403.utils;
 
 import java.lang.reflect.Field;
 
-public class StringUtil {
-    private StringUtil() {
+public class StringUtils {
+    private StringUtils() {
         throw new IllegalStateException("Utility class");
     }
 

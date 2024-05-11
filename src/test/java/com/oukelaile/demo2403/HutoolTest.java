@@ -35,7 +35,7 @@ public class HutoolTest {
                     tree.setId(String.valueOf(treeNode.getMenuId()));
                     tree.setParentId(String.valueOf(treeNode.getParentMenuId()));
                     tree.setName(treeNode.getMenuName());
-                    tree.putExtra("total",treeNode.getMenuPath());
+                    tree.putExtra("total",treeNode.getRouterPath());
                 });
 
         System.out.println(JSON.toJSONString(treeNodes));

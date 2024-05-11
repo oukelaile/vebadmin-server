@@ -7,9 +7,9 @@ import com.oukelaile.demo2403.entity.Shop;
 import com.oukelaile.demo2403.mapper.ShopMapper;
 import com.oukelaile.demo2403.query.ShopQuery;
 import com.oukelaile.demo2403.service.shop.ShopService;
-import com.oukelaile.demo2403.util.StringUtil;
-import com.oukelaile.demo2403.util.vo.CommonPage;
-import com.oukelaile.demo2403.util.vo.CommonPageUtils;
+import com.oukelaile.demo2403.utils.StringUtils;
+import com.oukelaile.demo2403.utils.vo.List;
+import com.oukelaile.demo2403.utils.vo.CommonPageUtils;
 import com.oukelaile.demo2403.vo.shop.ShopVo;
 import com.oukelaile.demo2403.vo.shop.page.ShopPageVo;
 import org.springframework.stereotype.Service;
@@ -29,9 +29,9 @@ public class ShopServiceImpl extends ServiceImpl<ShopMapper, Shop> implements Sh
     }
 
     @Override
-    public CommonPage<ShopPageVo> findByPage(ShopQuery query) {
+    public List<ShopPageVo> findByPage(ShopQuery query) {
         IPage<Shop> pages = new Page<>(query.getCurrentPage(), query.getPageSize());
-        ShopQuery newQuery = StringUtil.convertEmptyToNull(query);
+        ShopQuery newQuery = StringUtils.convertEmptyToNull(query);
         pages = shopMapper.findByPage(pages, newQuery);
         return CommonPageUtils.assemblyPage(pages.convert(ShopPageVo::buildVo));
     }
