@@ -1,0 +1,32 @@
+spring:
+  # 数据库配置
+  datasource:
+    url: jdbc:mysql://localhost:3306/demo2403?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  # redis配置
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: 123456
+    lettuce:
+      pool:
+        max-active: 200
+        max-wait: -1
+        max-idle: 20
+        min-idle: 0
+  # 上传文件配置
+  servlet:
+    .multipart:
+      .max-file-size: 10MB
+      .max-request-size: 10MB
+  # 资源配置
+  web:
+    resources:
+      static-locations: file:/E:/fileStorage/
+
+# 目录常量配置
+file:
+  storage: "E:/fileStorage"
+  files: "/files"

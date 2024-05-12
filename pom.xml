@@ -3,10 +3,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.oukelaile</groupId>
-    <artifactId>demo2403</artifactId>
+    <artifactId>vebadmin-server</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>demo2403</name>
-    <description>demo2403</description>
+    <name>vebadmin-server</name>
+    <description>vebadmin-server</description>
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -133,7 +133,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
                 <configuration>
-                    <mainClass>com.oukelaile.demo2403.Demo2403Application</mainClass>
+                    <mainClass>com.oukelaile.vebAdmin.vebAdminApplication</mainClass>
                     <skip>true</skip>
                 </configuration>
                 <executions>

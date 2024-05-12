@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.oukelaile.demo2403.mapper.system.SysMenuMapper">
+<mapper namespace="com.oukelaile.vebAdmin.mapper.system.SysMenuMapper">
 
-    <resultMap id="sysMenuMap" type="com.oukelaile.demo2403.entity.system.SysMenu">
+    <resultMap id="sysMenuMap" type="com.oukelaile.vebAdmin.entity.system.SysMenu">
         <result column="MENU_ID" jdbcType="BIGINT" property="menuId" />
         <result column="MENU_NAME" jdbcType="VARCHAR" property="menuName" />
         <result column="PARENT_MENU_ID" jdbcType="BIGINT" property="parentMenuId" />
@@ -13,11 +13,12 @@
 
 
 
-    <select id="selectMenuNormalAll" resultType="com.oukelaile.demo2403.entity.system.SysMenu">
+    <select id="selectMenuNormalAll" resultType="com.oukelaile.vebAdmin.entity.system.SysMenu">
         SELECT * FROM sys_menu
         WHERE del_flag = 0 AND status = 0
     </select>
-    <select id="selectAllList" resultType="com.oukelaile.demo2403.entity.system.SysMenu">
+
+    <select id="selectAllList" resultType="com.oukelaile.vebAdmin.entity.system.SysMenu">
         SELECT * FROM sys_menu
         WHERE del_flag = 0
         <if test="param.menuName != null and param.menuName != ''">
@@ -25,7 +26,7 @@
         </if>
     </select>
 
-    <!--    <select id="selectAllList" resultType="com.oukelaile.demo2403.entity.system.SysMenu">-->
+    <!--    <select id="selectAllList" resultType="com.oukelaile.vebAdmin.entity.system.SysMenu">-->
 <!--        SELECT * FROM sys_menu-->
 <!--        WHERE del_flag = 0-->
 <!--    </select>-->
