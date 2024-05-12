@@ -55,6 +55,11 @@ public class SysMenuTableVo {
     private Integer menuOrder;
 
     /**
+     * 是否隐藏 0显示1隐藏
+     */
+    private Integer hide;
+
+    /**
      * 创建者
      */
     private String create_by;

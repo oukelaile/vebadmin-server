@@ -64,6 +64,11 @@ public class SysMenu {
 	private Integer menuOrder;
 
 	/**
+	 * 是否隐藏 0显示1隐藏
+	 */
+	private Integer hide;
+
+	/**
 	 *
 	 */
 	private DelFlag delFlag;
