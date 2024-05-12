@@ -1,12 +1,13 @@
-package com.oukelaile.demo2403.controller.system;
+package com.oukelaile.vebAdmin.controller.system;
 
-import com.oukelaile.demo2403.ao.system.SysMenuAo;
-import com.oukelaile.demo2403.entity.system.SysMenu;
-import com.oukelaile.demo2403.query.system.SysMenuQuery;
-import com.oukelaile.demo2403.service.system.SysMenuService;
-import com.oukelaile.demo2403.utils.vo.ResponseEnum;
-import com.oukelaile.demo2403.vo.system.ResponseVo;
-import com.oukelaile.demo2403.vo.system.SysMenuTableVo;
+
+import com.oukelaile.vebAdmin.ao.system.SysMenuAo;
+import com.oukelaile.vebAdmin.entity.system.SysMenu;
+import com.oukelaile.vebAdmin.query.system.SysMenuQuery;
+import com.oukelaile.vebAdmin.service.system.SysMenuService;
+import com.oukelaile.vebAdmin.utils.vo.ResponseEnum;
+import com.oukelaile.vebAdmin.vo.system.ResponseVo;
+import com.oukelaile.vebAdmin.vo.system.SysMenuTableVo;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
