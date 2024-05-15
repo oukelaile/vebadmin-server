@@ -12,4 +12,14 @@ public class SysMenuQuery{
      */
     private String menuName;
 
+    /**
+     * 菜单类型
+     */
+    private String menuType;
+
+    /**
+     * 显示/隐藏 0显示 1隐藏
+     */
+    private Integer hide;
+
 }

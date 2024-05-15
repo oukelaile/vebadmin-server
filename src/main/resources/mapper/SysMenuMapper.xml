@@ -15,7 +15,8 @@
 
     <select id="selectMenuNormalAll" resultType="com.oukelaile.vebAdmin.entity.system.SysMenu">
         SELECT * FROM sys_menu
-        WHERE del_flag = 0 AND status = 0
+        WHERE del_flag = 0
+        AND status = 0
     </select>
 
     <select id="selectAllList" resultType="com.oukelaile.vebAdmin.entity.system.SysMenu">
@@ -24,11 +25,13 @@
         <if test="param.menuName != null and param.menuName != ''">
             AND menu_name LIKE CONCAT('%',#{param.menuName},'%')
         </if>
+        <if test="param.menuType != null and param.menuType != ''">
+            AND menu_type = #{param.menuType}
+        </if>
+        <if test="param.hide != null">
+            AND hide = #{param.hide}
+        </if>
     </select>
 
-    <!--    <select id="selectAllList" resultType="com.oukelaile.vebAdmin.entity.system.SysMenu">-->
-<!--        SELECT * FROM sys_menu-->
-<!--        WHERE del_flag = 0-->
-<!--    </select>-->
 
 </mapper>
